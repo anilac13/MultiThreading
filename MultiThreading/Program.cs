@@ -5,7 +5,8 @@ namespace MultiThreading
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to Multi-Threading problem");
+            TPLOperation operation = new TPLOperation();
+            operation.TaskParallel();
         }
     }
 }
