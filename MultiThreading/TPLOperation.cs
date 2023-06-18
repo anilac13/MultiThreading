@@ -23,6 +23,11 @@ namespace MultiThreading
             {
                 Console.WriteLine("Begin second task");
                 GetMostCommonWords(words);
+            },
+            () =>
+            {
+                Console.WriteLine("Begin third task");
+                GetCountForWord(words, "sleep");
             }
             );
             #endregion
@@ -51,6 +56,13 @@ namespace MultiThreading
                 s.AppendLine($" {word}");
             }
             Console.WriteLine(s.ToString());
+        }
+        public void GetCountForWord(string[] words, string term)
+        {
+            var findWord = (from word in words
+                            where word.ToUpper().Contains(term.ToUpper())
+                            select word);
+            Console.WriteLine($@"Task 3 --> The word ""{term}"" occurs {findWord.Count()} times");
         }
 
         public string[] CreateWordArray(string url)
