@@ -18,6 +18,11 @@ namespace MultiThreading
             {
                 Console.WriteLine("Begin first task");
                 GetLongestWords(words);
+            },
+            () =>
+            {
+                Console.WriteLine("Begin second task");
+                GetMostCommonWords(words);
             }
             );
             #endregion
@@ -30,6 +35,22 @@ namespace MultiThreading
                                select word).First();
             Console.WriteLine($"Task 1: --> Longest word is {longestWord}");
             return longestWord;
+        }
+        public void GetMostCommonWords(string[] words)
+        {
+            var frequencyOrder = from word in words
+                                 where word.Length > 6
+                                 group word by word into c
+                                 orderby c.Count() descending
+                                 select c.Key;
+            var commonWords = frequencyOrder.Take(10);
+            StringBuilder s = new StringBuilder();
+            s.Append("Task 2 --> Most common words are: ");
+            foreach ( var word in commonWords )
+            {
+                s.AppendLine($" {word}");
+            }
+            Console.WriteLine(s.ToString());
         }
 
         public string[] CreateWordArray(string url)
