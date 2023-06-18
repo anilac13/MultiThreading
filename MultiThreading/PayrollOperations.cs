@@ -25,6 +25,22 @@ namespace MultiThreading
                 Console.WriteLine($"Employee added: {payrollData.EmployeeName}");
             });
         }
+
+        public void AddEmployeeWithThread(List<Payroll> payrolls1)
+        {
+            payrolls1.ForEach(payrollData =>
+            {
+                Task Thread = new Task(() =>
+                {
+                    Console.WriteLine($"Employee being added:- {payrollData.EmployeeName}");
+                    this.AddEmpoyeesToList(payrollData);
+                    Console.WriteLine($"Employee added: {payrollData.EmployeeName}");
+                });
+                Thread.Start();
+            });
+            Console.WriteLine(this.payrolls1.Count);
+        }
+
         public void AddEmpoyeesToList(Payroll pay)
         {
             payrolls1.Add(pay);

@@ -19,7 +19,12 @@ namespace MultiThreadingTest
             DateTime startDateTime = DateTime.Now;
             operations.AddEmployee(payrolls);
             DateTime stopDateTime = DateTime.Now;
-            Console.WriteLine($"Time with Thread:- {stopDateTime - startDateTime}");
+            Console.WriteLine($"Time without Thread:- {stopDateTime - startDateTime}");
+
+            DateTime startDateTime1 = DateTime.Now;
+            operations.AddEmployeeWithThread(payrolls);
+            DateTime stopDateTime1 = DateTime.Now;
+            Console.WriteLine($"Time with Thread:- {stopDateTime1 - startDateTime1}");
         }
     }
 }
